@@ -7,8 +7,8 @@ const formatExplanation = (explanation) => {
     .trimLeft();
 };
 
-async function apodFetcher() {
-  let URL = "apod.nasa.gov/apod/astropix.html";
+async function apodFetcher(id) {
+  let URL = `apod.nasa.gov/apod/${id}.html`;
   let responseHTML = await fetch(
     `https://api.kaustav.ml/proxy/${URL}`
   ).then((response) => response.text());

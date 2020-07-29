@@ -1,9 +1,9 @@
 import React from "react";
 
-function Loading() {
+function Loading({ message }) {
   return (
-    <div className="mx-auto max-w-4xl">
-      <h1>Loading...</h1>
+    <div className="flex items-center justify-center h-screen bg-gray-900 md:p-4 text-white">
+      <h1>{message}</h1>
     </div>
   );
 }

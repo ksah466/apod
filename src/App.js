@@ -7,11 +7,17 @@ import DisplayApod from "./components/DisplayApod.js";
 import apodFetcher from "./api/apod.js";
 
 function App() {
-  const { data, error } = useSWR("fetch-apod", apodFetcher);
+  const { data, error } = useSWR("ap200723", apodFetcher);
   console.log({ data, error });
 
-  if (!data) return <Loading />;
-  return <DisplayApod data={data} />;
+  if (error) {
+    return <Loading message={error} />;
+  }
+  if (data) {
+    return <DisplayApod data={data} />;
+  } else {
+    return <Loading message="Fetching..." />;
+  }
 }
 
 export default App;
