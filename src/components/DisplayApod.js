@@ -2,39 +2,22 @@ import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-import colorthief from "colorthief/dist/color-thief.umd.js";
-import colorThiefUmd from "colorthief/dist/color-thief.umd.js";
+import getColor from "../api/color.js";
+import useSWR from "swr";
 
-function getColor(url, callback) {
-  var imageElement = document.createElement("IMG");
-
-  let urlWithoutStart = url.slice(url.indexOf("://") + 3);
-
-  imageElement.src = `https://api.kaustav.ml/proxy/${urlWithoutStart}`;
-  imageElement.setAttribute("crossorigin", "anonymous");
-
-  imageElement.addEventListener("load", function () {
-    let thief = new colorThiefUmd();
-    let color = thief.getColor(imageElement);
-    callback(color);
-  });
-}
-
-function DisplayApod({ data }) {
-  let [backgroundColor, setBackgroundColor] = useState("black");
-
-  let { title, copyright, date, explanation, hdurl, url } = data;
+function DisplayApod({ data: { title, hdurl, url } }) {
+  // thumbnail
   let thumbnailImage = `https://api.kaustav.ml/imaginary/thumbnail?width=100&url=${url}`;
 
-  getColor(thumbnailImage, (color) =>
-    setBackgroundColor(`rgb(${color.join(",")})`)
-  );
+  // background color
+  const { data: color, error } = useSWR(url, getColor);
 
   return (
     <div
       className="flex items-center justify-center h-screen md:p-4"
       style={{
-        backgroundColor: backgroundColor,
+        backgroundColor: color || "black",
+        transition: "background-color 0.5s cubic-bezier(0, 0.55, 0.45, 1)",
       }}
     >
       <a href={hdurl} className="rounded-lg border shadow-lg p-1">

@@ -7,7 +7,9 @@ import DisplayApod from "./components/DisplayApod.js";
 import apodFetcher from "./api/apod.js";
 
 function App() {
-  const { data, error } = useSWR("ap200723", apodFetcher);
+  // apYYMMDD for a certain date
+  // astropix for the latest
+  const { data, error } = useSWR("ap200727", apodFetcher);
   console.log({ data, error });
 
   if (error) {
