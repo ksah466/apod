@@ -1,7 +1,11 @@
 import React from "react";
 
 function Loading() {
-  return <h1>You shouldn't be able to see this</h1>;
+  return (
+    <div className="mx-auto max-w-4xl">
+      <h1>Loading...</h1>
+    </div>
+  );
 }
 
 export default Loading;

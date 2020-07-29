@@ -6,17 +6,17 @@ function DisplayApod({
   data: { title, copyright, date, explanation, hdurl, url },
 }) {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="flex items-center justify-center h-screen bg-gray-900 md:p-4">
       <LazyLoadImage
+        className="rounded-lg border shadow-lg p-1"
+        style={{
+          maxHeight: "90vh",
+        }}
         placeholderSrc={url}
         alt={title}
         effect="blur"
         src={hdurl}
       />
-      <h3>{date.toDateString()}</h3>
-      <h4>Copyright {copyright}</h4>
-      <p>{explanation}</p>
     </div>
   );
 }
