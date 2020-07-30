@@ -9,7 +9,7 @@ import apodFetcher from "./api/apod.js";
 function App() {
   // apYYMMDD for a certain date
   // astropix for the latest
-  const { data, error } = useSWR("ap200727", apodFetcher);
+  const { data, error } = useSWR("astropix", apodFetcher);
   console.log({ data, error });
 
   if (error) {

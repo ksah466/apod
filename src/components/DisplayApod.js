@@ -3,20 +3,21 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 import getColor from "../api/color.js";
-import useSWR from "swr";
 
 function DisplayApod({ data: { title, hdurl, url } }) {
+  let [backgroundColor, setbackgroundColor] = useState("black");
+
   // thumbnail
   let thumbnailImage = `https://api.kaustav.ml/imaginary/thumbnail?width=100&url=${url}`;
 
   // background color
-  const { data: color, error } = useSWR(url, getColor);
+  const bgColor = getColor(url);
 
   return (
     <div
       className="flex items-center justify-center h-screen md:p-4"
       style={{
-        backgroundColor: color || "black",
+        backgroundColor: backgroundColor,
         transition: "background-color 0.5s cubic-bezier(0, 0.55, 0.45, 1)",
       }}
     >
@@ -25,6 +26,10 @@ function DisplayApod({ data: { title, hdurl, url } }) {
           style={{
             maxHeight: "90vh",
             maxWidth: "90vw",
+          }}
+          afterLoad={() => {
+            console.log("afterLoad");
+            bgColor.then(setbackgroundColor);
           }}
           placeholderSrc={thumbnailImage}
           alt={title}
