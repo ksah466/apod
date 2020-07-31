@@ -7,7 +7,7 @@ function DisplayApod({ data: { title, hdurl, url, rgb, embed } }) {
 
   return (
     <div
-      className="flex items-center justify-center h-screen md:p-4"
+      className="flex items-center justify-center h-full md:p-4"
       style={{
         backgroundColor: dominantColor,
         transition: "background-color 0.5s cubic-bezier(0, 0.55, 0.45, 1)",
@@ -32,7 +32,7 @@ function DisplayApod({ data: { title, hdurl, url, rgb, embed } }) {
               maxWidth: "90vw",
             }}
             afterLoad={() => {
-              let color = `rgb(${rgb.join(",")})`;
+              let color = `rgb(${rgb[0].join(",")})`;
               setDominantColor(color);
             }}
             placeholderSrc={`https://api.kaustav.ml/imaginary/thumbnail?width=100&url=${url}`}
