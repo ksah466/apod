@@ -3,7 +3,7 @@ async function apodFetcher(id) {
   if (Date.parse(id)) {
     extra = `?date=${id}`;
   }
-  return fetch("https://api-kaustav-ml.onrender.com/apod.json" + extra)
+  return fetch("https://api.kaustav.ml/apod.json" + extra)
     .then((response) => response.json())
     .then((json) => {
       if (json["success"]) {
